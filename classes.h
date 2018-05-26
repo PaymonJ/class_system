@@ -23,6 +23,7 @@ class Section {
         void printStats();
     private:
         void calculateStats();
+        bool validateGrade(float grade) { return grade < 0 || grade > 100 ? false : true;};
         Student* binarySearch(Student* arrOfStudents[], int first, int last, string student);
         Student* section[1000];
         unsigned int size;
@@ -34,7 +35,14 @@ class Section {
 
 void Section::addStudent(string studentNumber, float grade)
 {
+    if (!validateGrade(grade))
+    {
+        cout << "Invalid grade." << endl;
+        return;
+    }
+
     Student *newStudent = new Student(studentNumber, grade);
+
     if(size == 0)
     {
         section[0] = newStudent;
@@ -71,6 +79,12 @@ void Section::changeGrade(string studentNumber, float newGrade)
     if (studentToUpdate == NULL) cout << "Student " << studentNumber << " not found. Grade not updated." << endl;
     else
     {
+        if (!validateGrade(newGrade))
+        {
+            cout << "Invalid grade." << endl;
+            return;
+        }
+
         float oldGrade = studentToUpdate->getGrade();
         studentToUpdate->updateGrade(newGrade);
         calculateStats();
