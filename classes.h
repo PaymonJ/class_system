@@ -22,10 +22,9 @@ class Section {
         void printStudents();
         void printStats();
     private:
-        void calculateMean();
-        void calculateSD();
+        void calculateStats();
         Student* binarySearch(Student* arrOfStudents[], int first, int last, string student);
-        Student* section[100];
+        Student* section[1000];
         unsigned int size;
         float minGrade;
         float maxGrade;
@@ -44,6 +43,13 @@ void Section::addStudent(string studentNumber, float grade)
     }
     else
     {
+        Student *checkDup = binarySearch(section, 0, size-1, studentNumber);
+        if (checkDup != NULL)
+        {
+            cout << "Student " << studentNumber << " found. Not adding." << endl;
+            return;
+        }
+
         if(newStudent->getGrade() < minGrade) minGrade = newStudent->getGrade();
         if(newStudent->getGrade() > maxGrade) maxGrade = newStudent->getGrade();
 
@@ -56,8 +62,7 @@ void Section::addStudent(string studentNumber, float grade)
         section[i] = newStudent;
     }
     size++;
-    calculateMean();
-    calculateSD();
+    calculateStats();
 }
 
 void Section::changeGrade(string studentNumber, float newGrade)
@@ -68,13 +73,14 @@ void Section::changeGrade(string studentNumber, float newGrade)
     {
         float oldGrade = studentToUpdate->getGrade();
         studentToUpdate->updateGrade(newGrade);
-        cout << "Student " << studentNumber << " grade updated from " << oldGrade << " to " << newGrade << "." << endl;
-        calculateMean();
-        calculateSD();
+        calculateStats();
+        if(studentToUpdate->getGrade() < minGrade) minGrade = studentToUpdate->getGrade();
+        if(studentToUpdate->getGrade() > maxGrade) maxGrade = studentToUpdate->getGrade();
+        cout << "Student " << studentNumber << " grade updated from " << oldGrade << " to " << studentToUpdate->getGrade() << "." << endl;
     }
 }
 
-void Section::calculateMean()
+void Section::calculateStats()
 {
     float sum = 0;
     for(unsigned int i = 0; i < size; i++)
@@ -82,11 +88,7 @@ void Section::calculateMean()
         sum += section[i]->getGrade();
     }
     mean = sum/size;
-}
-
-void Section::calculateSD()
-{
-    float sum = 0.0;
+    sum = 0;
     for(unsigned int i = 0; i < size; i++)
     {
         sum += pow((section[i]->getGrade() - mean), 2);
@@ -118,7 +120,7 @@ Student* Section::binarySearch(Student* arrOfStudents[], int first, int last, st
     {
         int mid = (first + last)/2;
         if (arrOfStudents[mid]->getStudentNumber() == student) return arrOfStudents[mid];
-        else if (arrOfStudents[mid]->getStudentNumber() < student) return binarySearch(arrOfStudents, first, mid-1, student);
+        else if (arrOfStudents[mid]->getStudentNumber() > student) return binarySearch(arrOfStudents, first, mid-1, student);
         else return binarySearch(arrOfStudents, mid+1, last, student);
     }
     return NULL;
