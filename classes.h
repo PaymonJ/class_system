@@ -21,6 +21,8 @@ class Section {
         void changeGrade(string studentNumber, float newGrade);
         void printStudents();
         void printStats();
+        void readFromFile(string fileName);
+        void writeToFile(string fileName);
     private:
         void calculateStats();
         bool validateGrade(float grade) { return grade < 0 || grade > 100 ? false : true;};
@@ -126,6 +128,44 @@ void Section::printStats()
     cout << "Maximum Grade: " << maxGrade << endl;
     cout << "Mean: " << mean << endl;
     cout << "Standard Deviation: " << standardDeviation << endl;
+}
+
+void Section::readFromFile(string fileName)
+{
+    ifstream fileToRead(fileName.c_str());
+    string studentNumber;
+    string gradeString;
+    float grade;
+    while(getline(fileToRead, studentNumber, ','))
+    {
+        getline(fileToRead, gradeString);
+        grade = stof(gradeString);
+
+        addStudent(studentNumber, grade);
+    }
+    fileToRead.close();
+}
+
+void Section::writeToFile(string fileName)
+{
+    ofstream fileToWrite(fileName.c_str());
+    string output = "";
+    for(unsigned int i = 0; i < size; i++)
+    {
+        output += section[i]->getStudentNumber() + "," + to_string(section[i]->getGrade()) + "\n";
+    }
+    fileToWrite << output;
+    fileToWrite.close();
+
+    ofstream fileToWriteStats(("STATS" + fileName).c_str());
+    string outputStats = "";
+    outputStats += "Total students: " + to_string(size) + "\n";
+    outputStats += "Minimum grade: " + to_string(minGrade) + "\n";
+    outputStats += "Maximum grade: " + to_string(maxGrade) + "\n";
+    outputStats += "Mean: " + to_string(mean) + "\n";
+    outputStats += "Standard Deviation: " + to_string(standardDeviation) + "\n";
+    fileToWriteStats << outputStats;
+    fileToWriteStats.close();
 }
 
 Student* Section::binarySearch(Student* arrOfStudents[], int first, int last, string student)
