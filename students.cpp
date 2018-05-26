@@ -59,16 +59,9 @@ class Section {
                 cout << section[i]->getLastName() << ", " << section[i]->getFirstName() << ", " << section[i]->getGrade() << endl;
             }
         };
-        void printStats()
-        {
-            cout << "Minimum Grade: " << minGrade << endl;
-            cout << "Maximum Grade: " << maxGrade << endl;
-            cout << "Mean: " << mean << endl;
-            cout << "Standard Deviation: " << standardDeviation << endl;
-        };
         void calculateMean()
         {
-            int sum = 0;
+            float sum = 0;
             for(unsigned int i = 0; i < size; i++)
             {
                 sum += section[i]->getGrade();
@@ -77,30 +70,37 @@ class Section {
         };
         void calculateSD()
         {
-            float sum = 0;
+            float sum = 0.0;
             for(unsigned int i = 0; i < size; i++)
             {
-                float distanceToMean = abs(section[i]->getGrade() - mean);
-                sum += pow(distanceToMean, 2);
+                sum += pow((section[i]->getGrade() - mean), 2);
             }
-            sum = sum/size;
-            standardDeviation = sqrt(sum);
-        }
+            standardDeviation = sqrt(sum/size);
+        };
+        void printStats()
+        {
+            cout << "Minimum Grade: " << minGrade << endl;
+            cout << "Maximum Grade: " << maxGrade << endl;
+            cout << "Mean: " << mean << endl;
+            cout << "Standard Deviation: " << standardDeviation << endl;
+        };
     private:
         Student* section[100];
         unsigned int size;
         unsigned int minGrade;
         unsigned int maxGrade;
         float mean;
-        float median;
         float standardDeviation;
 };
 
 int main()
 {
     Section *CMPT225 = new Section();
-    CMPT225->addStudent("Jalali", "Paymon", 92);
-    CMPT225->addStudent("Do", "Andrew", 94);
+    CMPT225->addStudent("Jalali", "Paymon", 1);
+    CMPT225->addStudent("Do", "Andrew", 4);
+    CMPT225->addStudent("lo", "Andrew", 7);
+    CMPT225->addStudent("lo", "Andrew", 2);
+    CMPT225->addStudent("lo", "Andrew", 6);
     CMPT225->printStudents();
     CMPT225->printStats();
 
