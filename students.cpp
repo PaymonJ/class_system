@@ -6,27 +6,24 @@ using namespace std;
 
 class Student {
     public:
-        Student(std::string last, std::string first, unsigned int percent)
+        Student(std::string studentNo, unsigned int percent)
         {
-            lastName = last;
-            firstName = first;
+            studentNumber = studentNo;
             grade = percent;
         };
-        std::string getLastName() { return lastName; }
-        std::string getFirstName() { return firstName; }
+        std::string getStudentNumber() { return studentNumber; }
         unsigned int getGrade() { return grade; }
     private:
-        std::string lastName;
-        std::string firstName;
+        std::string studentNumber;
         unsigned int grade;
 };
 
 class Section {
     public:
         Section(){size = 0;};
-        void addStudent(std::string lastName, std::string firstName, unsigned int grade)
+        void addStudent(std::string studentNumber, unsigned int grade)
         {
-            Student *newStudent = new Student(lastName, firstName, grade);
+            Student *newStudent = new Student(studentNumber, grade);
             if(size == 0)
             {
                 section[0] = newStudent;
@@ -39,7 +36,7 @@ class Section {
                 if(newStudent->getGrade() > maxGrade) maxGrade = newStudent->getGrade();
 
                 int i = size;
-                while ((i > 0) && (newStudent->getLastName() < section[i-1]->getLastName()))
+                while ((i > 0) && (newStudent->getStudentNumber() < section[i-1]->getStudentNumber()))
                 {
                     section[i] = section[i-1];
                     i = i - 1;
@@ -52,11 +49,11 @@ class Section {
         };
         void printStudents()
         {
-            cout << "Last Name, First Name, Grade" << endl;
-            cout << "----------------------------" << endl;
+            cout << "Student Number, Grade" << endl;
+            cout << "---------------------" << endl;
             for(unsigned int i = 0; i < size; i++)
             {
-                cout << section[i]->getLastName() << ", " << section[i]->getFirstName() << ", " << section[i]->getGrade() << endl;
+                cout << section[i]->getStudentNumber() << ", " << section[i]->getGrade() << endl;
             }
         };
         void calculateMean()
@@ -77,13 +74,7 @@ class Section {
             }
             standardDeviation = sqrt(sum/size);
         };
-        void printStats()
-        {
-            cout << "Minimum Grade: " << minGrade << endl;
-            cout << "Maximum Grade: " << maxGrade << endl;
-            cout << "Mean: " << mean << endl;
-            cout << "Standard Deviation: " << standardDeviation << endl;
-        };
+        void printStats();
     private:
         Student* section[100];
         unsigned int size;
@@ -93,14 +84,22 @@ class Section {
         float standardDeviation;
 };
 
+void Section::printStats()
+{
+    cout << "Minimum Grade: " << minGrade << endl;
+    cout << "Maximum Grade: " << maxGrade << endl;
+    cout << "Mean: " << mean << endl;
+    cout << "Standard Deviation: " << standardDeviation << endl;
+}
+
 int main()
 {
     Section *CMPT225 = new Section();
-    CMPT225->addStudent("Jalali", "Paymon", 1);
-    CMPT225->addStudent("Do", "Andrew", 4);
-    CMPT225->addStudent("lo", "Andrew", 7);
-    CMPT225->addStudent("lo", "Andrew", 2);
-    CMPT225->addStudent("lo", "Andrew", 6);
+    CMPT225->addStudent("31257685", 1);
+    CMPT225->addStudent("39290219", 4);
+    CMPT225->addStudent("93299292", 7);
+    CMPT225->addStudent("02020020", 2);
+    CMPT225->addStudent("29292929", 6);
     CMPT225->printStudents();
     CMPT225->printStats();
 
