@@ -26,11 +26,12 @@ int main()
         CMPT225->printStudents();
         CMPT225->printStats();
     }
-    catch (invalid_argument)
+    catch (invalid_argument &eIA)
     {
+        cout << "Exception: " << eIA.what() << endl;
         cout << "Non-numeric grade found in " << file << endl;
     }
-    catch (std::exception& e)
+    catch (exception &e)
     {
         cout << "Exception: " << e.what() << endl;
     }
