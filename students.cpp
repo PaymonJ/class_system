@@ -9,16 +9,23 @@ using namespace std;
 int main()
 {
     string file = "sampleData.csv";
-    Section *CMPT225 = new Section();
 
-    CMPT225->readFromFile(file);
-    CMPT225->addStudent("30554332", 100);
-    CMPT225->changeGrade("30500660", 0);
+    try
+    {
+        Section *CMPT225 = new Section();
 
-    CMPT225->writeToFile(file);
+        CMPT225->readFromFile(file);
 
-    CMPT225->printStudents();
-    CMPT225->printStats();
+        CMPT225->writeToFile(file);
+
+        CMPT225->printStudents();
+        CMPT225->printStats();
+    }
+    catch (std::exception& invalid_argument)
+    {
+        cout << "Non-numeric grade found in " << file << endl;
+    }
+
 
     return 0;
 }
