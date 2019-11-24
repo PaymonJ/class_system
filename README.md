@@ -46,7 +46,7 @@ Here are the methods of each class:
 
 
 ## Test Case
-The test case provided in `main.cpp` reads data from `sampleData.csv`, adds some new students, changes some grades, then outputs the modifications to `sampleData.csv` and class statistics to `STATSsampleData.csv`.
+The test case provided in `main.cpp` reads the given sample data from `sampleData.csv`, adds some new students, changes the student's grades, then save the modified data to `sampleData.csv` and the new class statistics to `STATSsampleData.csv`.
 
 Here is how to run the test case:
 
