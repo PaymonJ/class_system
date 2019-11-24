@@ -46,10 +46,10 @@ Here are the methods of each class:
 
 
 ## Test Case
-The test case provided in `main.cpp` reads data from `sampleData.csv`, adds some new students, changes some grades, then outputs the modifications to `sampleData.csv` and class statistics to `STATSsampleData.csv`.
+The test case provided in `main.cpp` reads the given sample data from `sampleData.csv`, adds some new students, changes the student's grades, then save the modified data to `sampleData.csv` and the new class statistics to `STATSsampleData.csv`.
 
 Here is how to run the test case:
 
-1. Clone this repository.
-1. `cd` into the cloned folder.
-1. Compile and run using `g++ -W -Wall -pedantic -o run -std=c++11 main.cpp && ./run`.
+1. Download/clone this repository.
+1. Open the downloaded/cloned folder.
+1. Compile and run using this command: `g++ -W -Wall -pedantic -o run -std=c++11 main.cpp && ./run`.
