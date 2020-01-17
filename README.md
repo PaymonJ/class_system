@@ -1,7 +1,7 @@
-# code_sample
+# class_system
 ## Introduction
 
-This code sample consists of a small application used for managing the grades of a classroom. The classroom's data is comprised of data relating to each student which is comprised of a student number and a grade. The student data can be entered manually in the program itself, or read from a properly formatted `.CSV` file.
+This application, called Class System, is used for managing the grades of a classroom. The classroom's data is comprised of data relating to each student which is comprised of a student number and a grade. The student data can be entered manually in the program itself, or read from a properly formatted `.CSV` file.
 
 Within the program, one can do the following:
 * add students to a classroom either manually or read from a `.CSV`
