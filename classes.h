@@ -36,7 +36,7 @@ class Section {
         bool validateGrade(float grade) { return grade < 0 || grade > 100 ? false : true;}; /* Checks to see if the grade is not less than 0 or greater than 100. */
         void calculateStats();
         Student* binarySearch(Student* arrOfStudents[], int first, int last, string student);
-        Student* section[1000];
+        Student* section[1000]; // SFU classes cannot have 1000; nevertheless, TODO: Add dynamic sizing feature
         unsigned int size;
         float minGrade;
         float maxGrade;
