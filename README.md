@@ -52,4 +52,4 @@ Here is how to run the test case:
 
 1. Download/clone this repository.
 1. Open the downloaded/cloned folder.
-1. Compile and run using this command: `g++ -W -Wall -pedantic -o run -std=c++11 main.cpp && ./run`.
+1. Compile and run using this command: `g++ -o run -std=c++11 main.cpp && ./run`.

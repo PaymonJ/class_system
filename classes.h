@@ -36,8 +36,9 @@ class Section {
         bool validateGrade(float grade) { return grade < 0 || grade > 100 ? false : true;}; /* Checks to see if the grade is not less than 0 or greater than 100. */
         void calculateStats();
         Student* binarySearch(Student* arrOfStudents[], int first, int last, string student);
-        Student* section[1000]; // SFU classes cannot have 1000; nevertheless, TODO: Add dynamic sizing feature
+        Student* section[100];
         unsigned int size;
+        unsigned int maxSize = 100;
         float minGrade;
         float maxGrade;
         float mean;
@@ -63,7 +64,7 @@ void Section::addStudent(string studentNumber, float grade)
     Student *newStudent = new Student(studentNumber, grade);
 
     /* If no other students exist, just insert at the beginning - set min/max grade accordingly. */
-    if(size == 0)
+    if (size == 0)
     {
         section[0] = newStudent;
         minGrade = newStudent->getGrade();
@@ -78,6 +79,20 @@ void Section::addStudent(string studentNumber, float grade)
             cout << "Student " << studentNumber << " found. Not adding." << endl;
             return;
         }
+
+        if (size == maxSize)
+        {
+            maxSize *= 2;
+            Student* newSection[maxSize];
+
+            for (unsigned int i = 0; i < size; i++)
+            {
+                newSection[i] = section[i];
+            }
+
+            *section = *newSection;
+        }
+
         /* Check if new student has the min.max grade. */
         if(newStudent->getGrade() < minGrade) minGrade = newStudent->getGrade();
         if(newStudent->getGrade() > maxGrade) maxGrade = newStudent->getGrade();
@@ -199,18 +214,15 @@ void Section::writeToFile(string fileName)
 */
 void Section::calculateStats()
 {
-    float sum = 0;
+    float meanSum = 0;
+    float stdSum = 0;
     for(unsigned int i = 0; i < size; i++)
     {
-        sum += section[i]->getGrade();
+        meanSum += section[i]->getGrade();
+        stdSum += pow((section[i]->getGrade() - mean), 2);
     }
-    mean = sum/size;
-    sum = 0;
-    for(unsigned int i = 0; i < size; i++)
-    {
-        sum += pow((section[i]->getGrade() - mean), 2);
-    }
-    standardDeviation = sqrt(sum/size);
+    mean = meanSum/size;
+    standardDeviation = sqrt(stdSum/size);
 }
 
 /*

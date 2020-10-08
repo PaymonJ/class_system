@@ -31,10 +31,6 @@ int main()
         cout << "Exception: " << eIA.what() << endl;
         cout << "Non-numeric grade found in " << file << endl;
     }
-    catch (exception &e)
-    {
-        cout << "Exception: " << e.what() << endl;
-    }
 
     return 0;
 }
