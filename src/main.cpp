@@ -13,6 +13,10 @@ int main()
         Section *CMPT225 = new Section();
         CMPT225->readFromFile(file);
 
+        CMPT225->addStudent(31254789, 75);
+        CMPT225->addStudent(32698567, 88);
+        CMPT225->addStudent(38945321, 62);
+
         CMPT225->changeGrade(32543595, 51);
         CMPT225->changeGrade(32404376, 42);
 
