@@ -20,7 +20,7 @@ Here are the methods of each class:
   * `Student()` - the constructor
   * `getStudentNumber()` - returns the student's student number
   * `getGrade()` - returns the student's grade
-  * `updateGrade(newGrade)` - changes the student's grade with `newGrade`
+  * `setGrade(newGrade)` - changes the student's grade with `newGrade`
 * Private
   * `studentNumber` - stores the student's student number
   * `grade` - stores the student's grade
@@ -35,9 +35,9 @@ Here are the methods of each class:
   * `readFromFile(fileName)` - reads student data from `fileName`
   * `writeToFile(fileName)` - writes student data to `fileName` and section statistics to `STATSfileName`
 * Private
-  * `validateGrade(grade)` - ensures that `grade` >= 0 and <= 100 
+  * `studentSearch()` - search for student in section
   * `calculateStats()` - calculates the mean and standard deviation of the class after everytime a grade is entered or changed
-  * `section[]` - the section holding the class data
+  * `section` - the section holding the class data
   * `size` - keeps track of the amount of students in the section
   * `minGrade` - keeps track of the minimum section grade
   * `maxGrade` - keeps track of the maximum section grade
@@ -48,8 +48,10 @@ Here are the methods of each class:
 ## Test Case
 The test case provided in `main.cpp` reads the given sample data from `sampleData.csv`, adds some new students, changes the student's grades, then save the modified data to `sampleData.csv` and the new class statistics to `STATSsampleData.csv`.
 
-Here is how to run the test case:
+Here is how to run the test case (requirements: `cmake, g++, make`):
 
-1. Download/clone this repository.
-1. Open the downloaded/cloned folder.
-1. Compile and run using this command: `g++ -o run -std=c++11 main.cpp && ./run`.
+1. Download/clone this repository and `cd` into it.
+1. `mkdir build && cd build`
+1. `cmake ../`
+1. `make`
+1. `./class_system`
