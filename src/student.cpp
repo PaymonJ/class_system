@@ -1,5 +1,5 @@
-#include "student.h"
 #include <stdexcept>
+#include "../include/student.h"
 
 Student::Student(unsigned int studentNo, float percent) 
     : studentNumber(studentNo), grade(percent)

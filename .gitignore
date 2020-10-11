@@ -1,5 +1,6 @@
 run
 run.exe
 .vs
+build/
 sampleData.csv
 STATSsampleData.csv
