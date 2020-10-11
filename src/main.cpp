@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    string file = "sampleData.csv";
+    string file = "../sampleData.csv";
 
     try
     {
